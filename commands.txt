@@ -1,0 +1,3 @@
+emulator -list-avds
+emulator -avd Pixel_2_XL_API_28
+ENVFILE=.env react-native run-android
