@@ -15,12 +15,16 @@ const window_width = Dimensions.get('window').width;
 const window_height = Dimensions.get('window').height;
 
 class Login extends React.Component {
-  state = {
-    email: '',
-    password: '',
-    hasError: false,
-    errorText: ''
-  };
+  constructor(props) {
+    super();
+    this.state = {
+      email: '',
+      password: '',
+      hasError: false,
+      errorText: ''
+    };
+  }
+
 
   async login(email, password) {
     let endpoint = Endpoints.authenticate;
@@ -41,7 +45,7 @@ class Login extends React.Component {
       await AsyncStorage.setItem('customer_user_email', email);
       await AsyncStorage.setItem('is_user_logged_in', "true");
       await AsyncStorage.setItem('typeFieldName', fieldName);
-      // Actions.home({fieldName: fieldName});
+      Actions.bookingForm();
       this.setState({hasError: true, errorText: 'Success!'});
     } else {
       this.setState({hasError: true, errorText: 'Invalid email or password!'});
@@ -68,7 +72,7 @@ class Login extends React.Component {
             </CardItem>
             {this.state.hasError?<Text style={{color: "#c0392b", textAlign: 'center', marginTop: 10}}>{this.state.errorText}</Text>:null}
           </Card>
-          <Button transparent>
+          <Button transparent onPress={() => Actions.signup()}>
             <Text> Register </Text>
           </Button>
         </Content>
